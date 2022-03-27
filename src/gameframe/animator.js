@@ -1,10 +1,10 @@
-const { toHaveDisplayValue } = require("@testing-library/jest-dom/dist/matchers");
+const { Shape, Circle, ImageTexture } = require("./shape");
 
-const instant = t => 1;
-const linear = t => t;
-const sin = t => (Math.sin(Math.PI * (t - 0.5)) + 1) / 2
+export const instant = t => 1;
+export const linear = t => t;
+export const sin = t => (Math.sin(Math.PI * (t - 0.5)) + 1) / 2
 
-class Animator {
+export default class Animator {
   constructor(width, height) {
     this.width = width;
     this.height = height;
@@ -12,12 +12,22 @@ class Animator {
     this.context = null;
     this.background = "#FFFFFF";
     
-    this.objects = {0: new Circle(0, 0, 10)};
+    this.objectsCreated = 1;
+    this.objects = {0: new ImageTexture(0, 0, "./texture.png")};
     this.animations = {};
 
     this.layers = [[0]];
 
     this.animateRelative(0, "x", 300, 30, sin);
+  }
+
+  addObject(object, layer) {
+    this.objects[this.objectsCreated] = object;
+    if (layer) {
+      // TODO: add to specifiable layer
+    }
+    this.layers[0].push(this.objectsCreated);
+    return this.objectsCreated++;
   }
 
   clearFrame() {
@@ -113,38 +123,4 @@ class Animator {
       throw Error("Property '" + id + "." + property + "' cannot be animated: '" + current + "'.");
     }
   }
-
-
-  stop() {
-    this.running = false;
-  }
 }
-
-class Shape {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-
-  draw(context) {
-
-  }
-}
-
-class Circle extends Shape {
-  constructor(x, y, radius, color) {
-    super(x, y);
-    this.radius = radius;
-    this.color = color || "#000000";
-  }
-
-  draw(context) {
-    context.beginPath();
-    context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-    context.closePath();
-    context.fillStyle = this.color;
-    context.fill();
-  }
-}
-
-export default Animator;

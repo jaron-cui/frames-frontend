@@ -6,15 +6,11 @@ const Canvas = (props) => {
   const height = props.height;
   const style = {border: "3px solid #000000"};
   const ref = useRef(null);
-  const canvas = <canvas ref={ref} id={props.name} width={width} height={height} style={style}></canvas>;
   const [animator, setAnimator] = useState(new Animator(width, height));
   
   useEffect(() => {
     const canvas = ref.current
     const context = canvas.getContext('2d')
-    //Our first draw
-    //context.fillStyle = '#000000'
-    //context.fillRect(0, 0, context.canvas.width, context.canvas.height)
 
     let animationFrameId;
     const render = () => {
@@ -29,12 +25,7 @@ const Canvas = (props) => {
     }
   }, [])
 
-  // {id: 0, type: line | rect | img, [start/end | texture + coordinate]: ...}
-  const objects = [];
-  // 0: [{prop, initval, endval, t, duration, easing}]
-  const animations = {}
-
-  return canvas;
+  return <canvas ref={ref} id={props.name} width={width} height={height} style={style}></canvas>;
 }
 
 export default Canvas;

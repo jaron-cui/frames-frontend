@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Canvas from "./Canvas";
+import Canvas from "./gameframe/Canvas";
 import React, {useState, useEffect} from "react";
 
 //const worker = new Worker("worker.js");

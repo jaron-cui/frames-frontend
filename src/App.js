@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from "react";
 import SockJsClient from 'react-stomp';
-import Canvas from "./Canvas";
+import Canvas from "./gameframe/Canvas";
 
 
 //const worker = new Worker("worker.js");

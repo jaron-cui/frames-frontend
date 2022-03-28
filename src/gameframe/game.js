@@ -1,6 +1,5 @@
 import Animator from "./animator";
 
-
 export default class Game {
   constructor(width, height) {
     this.animator = new Animator(width, height);
@@ -17,10 +16,10 @@ export default class Game {
   }
 
   onLeftClick() {
-
+    
   }
 
   onRightClick() {
-    
+
   }
 }

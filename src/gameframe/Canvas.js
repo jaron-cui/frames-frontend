@@ -1,4 +1,5 @@
 import React, {useRef, useState, useEffect} from "react";
+import Coinflip from "../game/coinflip";
 import Game from "./game";
 
 const Canvas = (props) => {
@@ -6,7 +7,7 @@ const Canvas = (props) => {
   const height = props.height;
   const style = {border: "3px solid #000000"};
   const ref = useRef(null);
-  const [animator, setAnimator] = useState(new Game(width, height));
+  const [animator, setAnimator] = useState(new Coinflip(width, height));
   
   useEffect(() => {
     const canvas = ref.current;
@@ -49,7 +50,7 @@ const Canvas = (props) => {
     onMouseMove={onMouseMove}
     onMouseDown={setProp("mouseDown", true)}
     onMouseUp={setProp("mouseDown", false)}
-    onClick={animator.onLeftClick}
+    onClick={() => animator.onLeftClick()}
     onContextMenu={event => {
       event.preventDefault();
       animator.onRightClick();

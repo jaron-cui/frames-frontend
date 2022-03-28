@@ -26,6 +26,20 @@ export class Circle extends Shape {
   }
 }
 
+export class Rectangle extends Shape {
+  constructor(x, y, width, height, color) {
+    super(x, y);
+    this.width = width;
+    this.height = height;
+    this.color = color;
+  }
+
+  draw(context) {
+    context.fillStyle = this.color;
+    context.fillRect(this.x, this.y, this.width, this.height);
+  }
+}
+
 export class ImageTexture extends Shape {
   constructor(x, y, path, scale) {
     super(x, y, scale);

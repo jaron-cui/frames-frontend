@@ -12,13 +12,13 @@ export default class Animator {
     this.context = null;
     this.background = "#FFFFFF";
     
-    this.objectsCreated = 1;
-    this.objects = {0: new ImageTexture(0, 0, "./texture.png")};
+    this.objectsCreated = 0;
+    this.objects = {};//{0: new ImageTexture(0, 0, "./texture.png")};
     this.animations = {};
 
-    this.layers = [[0]];
+    this.layers = [[]];
 
-    this.animateRelative(0, "x", 300, 30, sin);
+    //this.animateRelative(0, "x", 300, 30, sin);
   }
 
   addObject(object, layer) {
@@ -90,6 +90,11 @@ export default class Animator {
     this.context.fillStyle = this.background;
     this.context.fillRect(0, 0, this.width, this.height);
     this.context.restore();
+  }
+
+  animateTo(id, property, to, duration, easing) {
+    this._checkProperty(id, property);
+    this.animateFromTo(id, property, this.objects[id][property], to, duration, easing);
   }
 
   animateFromTo(id, property, initial, final, duration, easing) {

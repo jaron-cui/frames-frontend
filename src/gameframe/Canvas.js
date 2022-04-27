@@ -1,5 +1,6 @@
 import React, {useRef, useState, useEffect} from "react";
 import Coinflip from "../game/coinflip";
+import Chess from "../game/chess";
 import Game from "./game";
 
 const Canvas = (props) => {
@@ -7,7 +8,7 @@ const Canvas = (props) => {
   const height = props.height;
   const style = {border: "3px solid #000000"};
   const ref = useRef(null);
-  const [animator, setAnimator] = useState(new Coinflip(width, height));
+  const [animator, setAnimator] = useState(new Chess(width, height));
   
   useEffect(() => {
     const canvas = ref.current;

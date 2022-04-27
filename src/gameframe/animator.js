@@ -2,7 +2,8 @@ const { Shape, Circle, ImageTexture } = require("./shape");
 
 export const instant = t => 1;
 export const linear = t => t;
-export const sin = t => (Math.sin(Math.PI * (t - 0.5)) + 1) / 2
+export const sin = t => (Math.sin(Math.PI * (t - 0.5)) + 1) / 2;
+export const sinHalf2 = t => sin(t / 2 + .5);
 
 export default class Animator {
   constructor(width, height) {

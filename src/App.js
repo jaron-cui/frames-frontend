@@ -1,95 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from "react";
 import Canvas from "./gameframe/Canvas";
-//import {w3cwebsocket as W3CWebSocket} from 'websocket';
-const W3CWebSocket = require('websocket').w3cwebsocket;
-//import WebSocket from 'ws';
 
-//const worker = new Worker("worker.js");
-//const canvas = <Canvas name="canvas" width={400} height={300} worker={worker}/>;
-//const animator = new Animator("canvas");
-/*const ws = new W3CWebSocket("ws://localhost:8080/websocket");
-ws.onerror = function(err) {
-  alert('Connection Error: ' + JSON.stringify(err));
-};
-
-ws.onopen = function() {
-  alert('WebSocket Client Connected');
-};
-
-ws.onclose = function() {
-  alert('echo-protocol Client Closed');
-};
-
-ws.onmessage = function(e) {
-  if (typeof e.data === 'string') {
-    alert("Received: '" + e.data + "'");
-  }
-};*/
-class ClientExample extends React.Component {
+class Client extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			lastMessage: "",
-			name: "Theo",
+			sessionId: undefined
 		}
-    const ws = {}//new W3CWebSocket("ws://localhost:8080/ws");
-      /*let ws;
-      try {ws = new WebSocket("ws://localhost:8080/ws");} catch (e) {alert(e)}
-    
-
-      ws.addEventListener('error', function(event) {
-    alert('Connect Error: ' + JSON.stringify(event));
-});
-ws.addEventListener('close', function(event) {
-  alert('Close: ' + event);
-});
-
-ws.addEventListener('open', function(connection) {
-    alert('WebSocket Client Connected');
-});
-*/
-//client.connect('ws://localhost:8080/', 'echo-protocol');
-    /*
-    const ws = new WebSocketClient("ws://localhost:8080/");
-
-ws.on('open', function open() {
-  console.log('connected');
-  ws.send(Date.now());
-});
-
-ws.on('close', function close() {
-  console.log('disconnected');
-});
-
-ws.on('message', function message(data) {
-  console.log(`Round-trip time: ${Date.now() - data} ms`);
-
-  setTimeout(function timeout() {
-    ws.send(Date.now());
-  }, 500);
-});*/
-    
-    ws.onerror = function(err) {
-      alert('Connection Error: ' + JSON.stringify(err));
-    };
-  
-    ws.onopen = function() {
-      alert('WebSocket Client Connected');
-    };
-  
-    ws.onclose = function() {
-      alert('echo-protocol Client Closed');
-    };
-  
-    ws.onmessage = function(e) {
-      if (typeof e.data === 'string') {
-        alert("Received: '" + e.data + "'");
-      }
-    };
-    //this.ws = ws;
 	};
+
+  componentWillMount() {
+    this.initWebSocket();
+  }
+
+  handleMessage(message) {
+    // do actual stuff here later
+    alert('Message received: ' + message);
+  }
+
+  initWebSocket() {
+    const ws = new WebSocket("wss://localhost:8080/websocket");
+    ws.onerror = err => alert('WebSocket connection failed: ' + err.message);
+    ws.onopen = function() {
+      ws.onclose = () => alert('WebSocket connection closed');
+    };
+    ws.onmessage = initMessage => {
+      this.state.sessionId = JSON.parse(initMessage.data).sessionId;
+      alert('Initialized session: ' + this.state.sessionId);
+      ws.onmessage = this.handleMessage;
+    }
+  }
 
 	render() {
 		return (
@@ -103,4 +44,4 @@ ws.on('message', function message(data) {
 	}
 }
 
-export default ClientExample;
+export default Client;

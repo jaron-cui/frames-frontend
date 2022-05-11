@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
 import Canvas from "./gameframe/Canvas";
+import Home from './page/Home';
 
 class Client extends React.Component {
 	constructor(props) {
@@ -35,6 +36,7 @@ class Client extends React.Component {
 	render() {
 		return (
 			<div>
+        <Home />
         		<Canvas name="canvas" width={600} height={540} />
 				<div>
 					hi

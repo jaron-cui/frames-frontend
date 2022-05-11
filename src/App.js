@@ -20,7 +20,8 @@ class Client extends React.Component {
   }
 
   initWebSocket() {
-    const ws = new WebSocket("wss://localhost:8080/websocket");
+    //const ws = new WebSocket("wss://localhost:8080/websocket");
+    const ws = new WebSocket("wss://66.24.95.87:8080/websocket");
     ws.onerror = err => alert('WebSocket connection failed: ' + err.message);
     ws.onopen = function() {
       ws.onclose = () => alert('WebSocket connection closed');

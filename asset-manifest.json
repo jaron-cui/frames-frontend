@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/jaron-cui/frames-frontend/static/css/main.d1d1cfa5.css",
-    "main.js": "/jaron-cui/frames-frontend/static/js/main.79aa9307.js",
-    "static/js/787.3799b49f.chunk.js": "/jaron-cui/frames-frontend/static/js/787.3799b49f.chunk.js",
-    "index.html": "/jaron-cui/frames-frontend/index.html",
-    "main.d1d1cfa5.css.map": "/jaron-cui/frames-frontend/static/css/main.d1d1cfa5.css.map",
-    "main.79aa9307.js.map": "/jaron-cui/frames-frontend/static/js/main.79aa9307.js.map",
-    "787.3799b49f.chunk.js.map": "/jaron-cui/frames-frontend/static/js/787.3799b49f.chunk.js.map"
+    "main.css": "/frames-frontend/static/css/main.d1d1cfa5.css",
+    "main.js": "/frames-frontend/static/js/main.959a871d.js",
+    "static/js/787.3799b49f.chunk.js": "/frames-frontend/static/js/787.3799b49f.chunk.js",
+    "index.html": "/frames-frontend/index.html",
+    "main.d1d1cfa5.css.map": "/frames-frontend/static/css/main.d1d1cfa5.css.map",
+    "main.959a871d.js.map": "/frames-frontend/static/js/main.959a871d.js.map",
+    "787.3799b49f.chunk.js.map": "/frames-frontend/static/js/787.3799b49f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d1d1cfa5.css",
-    "static/js/main.79aa9307.js"
+    "static/js/main.959a871d.js"
   ]
 }

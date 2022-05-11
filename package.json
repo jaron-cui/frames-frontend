@@ -2,7 +2,7 @@
   "name": "frog-games",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/jaron-cui/frames-frontend",
+  "homepage": "https://jaron-cui.github.io/frames-frontend",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",

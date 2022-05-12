@@ -1,6 +1,8 @@
 import { sin, sinHalf2 } from "../gameframe/animator";
 import Game from "../gameframe/game";
 import { ImageTexture } from "../gameframe/shape";
+import boardTexture from '../resource/chess/board.png';
+import pawnTexture from '../resource/chess/piece/pawn.png'
 
 const boardOffset = {x:44,y:14};
 const tileSize = 64;
@@ -8,18 +10,18 @@ const floatBy = 10;
 export default class Chess extends Game {
   constructor(width, height) {
     super(width, height);
-    this.boardImage = this.add(new ImageTexture(boardOffset.x, boardOffset.y, './chess/board.png', 1));
+    this.boardImage = this.add(new ImageTexture(boardOffset.x, boardOffset.y, boardTexture, 1));
     this.board = [[], [this.newPiece('pawn', [0, 1])]];
     this.heldPiece = null;
   }
 
   newPiece(name, position) {
     let [visualX, visualY] = this.toVisualSpace(position);
-    return this.add(new ImageTexture(visualX, visualY, './chess/piece/' + name + '.png', 2));
+    return this.add(new ImageTexture(visualX, visualY, pawnTexture, 2));
   }
 
   onTick() {
-    console.log(this.mousePos);
+    
   }
 
   onLeftClick() {

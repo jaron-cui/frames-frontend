@@ -2,43 +2,46 @@ import './App.css';
 import React, { useState, useEffect } from "react";
 import Canvas from "./gameframe/Canvas";
 import Home from './page/Home';
+import Navigation from "./page/Navigation";
+import FrogService from './service/FrogService';
+import Lobby from './page/Lobby';
 
 class Client extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			sessionId: undefined
-		}
+		this.state = {};
 	};
 
-  componentWillMount() {
-    this.initWebSocket();
+  componentDidMount() {
+    this.service = new FrogService(this);
+    this.setState({
+      page: <Home service={this.service} />
+    });
   }
 
   handleMessage(message) {
-    // do actual stuff here later
-    alert('Message received: ' + message);
-  }
-
-  initWebSocket() {
-    //const ws = new WebSocket("wss://localhost:8080/websocket");
-    const ws = new WebSocket("wss://66.24.95.87:8080/websocket");
-    ws.onerror = err => alert('WebSocket connection failed: ' + err.message);
-    ws.onopen = function() {
-      ws.onclose = () => alert('WebSocket connection closed');
+    let newPage;
+    switch (message.type) {
+      case 'assignment':
+        newPage = <Lobby gameId={message.lobby.id} service={this.service} />;
+        break;
+      case 'gameStart':
+        newPage = undefined;
+        break;
+      default:
+        alert('no')
     };
-    ws.onmessage = initMessage => {
-      this.state.sessionId = JSON.parse(initMessage.data).sessionId;
-      alert('Initialized session: ' + this.state.sessionId);
-      ws.onmessage = this.handleMessage;
-    }
+    this.setState({
+      page: newPage
+    });
   }
 
 	render() {
 		return (
 			<div>
-        <Home />
-        		<Canvas name="canvas" width={600} height={540} />
+      <Navigation/>  
+        {this.state.page}
+        		<Canvas name="canvas" width={600} height={540}/>
 				<div>
 					hi
 				</div>

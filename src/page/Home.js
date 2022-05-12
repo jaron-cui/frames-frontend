@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import GameListing from "./GameListing";
-import Navigation from "./Navigation";
 
-export default function Home(props) {
+export default props => {
 
 
   
 
   return <div>
-    <Navigation />  
     <div style={{marginInline:'20px'}}>
-      <GameListing name='Chess'/>
+      <GameListing name='chess' service={props.service}/>
     </div>
   </div>
 }

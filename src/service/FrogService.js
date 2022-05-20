@@ -1,11 +1,11 @@
 import axios from "axios";
-import { client } from "websocket";
 
 const url = 'https://localhost:8080';
 
-export default class FrogService {
-  constructor(client) {
-    this.initWebSocket(client);
+class FrogService {
+  constructor() {
+    this.messageHandlers = [];
+    this._initWebSocket();
   }
 
   headers() {
@@ -16,8 +16,8 @@ export default class FrogService {
     }
   }
 
-  async createGame(game) {
-    axios.post(url + '/game/create/' + game, null, this.headers()).catch(error => {
+  async createGame(game, mode) {
+    axios.post(url + `/game/create/${game}-${mode}`, null, this.headers()).catch(error => {
       alert('Error creating game.');
     });
   }
@@ -34,17 +34,35 @@ export default class FrogService {
     });
   }
 
-  initWebSocket(client) {
+  sendMessage(message) {
+    this.ws.send(JSON.stringify(message));
+  }
+
+  onMessage(message) {
+    const data = JSON.parse(message.data);
+    this.messageHandlers.forEach(messageHandler => messageHandler(data));
+  }
+
+  _initWebSocket() {
     const ws = new WebSocket("wss://localhost:8080/websocket");
+    this.ws = ws;
     //const ws = new WebSocket("wss://66.24.95.87:8080/websocket");
-    ws.onerror = err => alert('WebSocket connection failed: ' + err.message);
+    ws.onerror = err => alert('WebSocket connection failed: ' + err);
     ws.onopen = function() {
       ws.onclose = () => alert('WebSocket connection closed');
     };
     ws.onmessage = initMessage => {
       this.sessionId = JSON.parse(initMessage.data).sessionId;
       alert('Initialized session: ' + this.sessionId);
-      ws.onmessage = message => client.handleMessage(JSON.parse(message.data));
+      ws.onmessage = message => this.onMessage(message);
     }
   }
+}
+
+const service = new FrogService();
+export default function getServiceSingleton(messageHandler) {
+  if (messageHandler) {
+    service.messageHandlers.push(messageHandler);
+  }
+  return service;
 }

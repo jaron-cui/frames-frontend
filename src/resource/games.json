@@ -1,0 +1,48 @@
+{
+  "clickrace": {
+    "title": "Click Race",
+    "description": "Test your clicking prowess!",
+    "modes": {
+      "duel": {
+        "title": "Duel with Friend",
+        "description": "Each round, after a random amount of time, the button will turn green. If you click it when it's green before your opponent, you get the point. However, if you click early, you lose a point. After a click is made, the next round starts immediately."
+      }
+    }
+  },
+  "chess": {
+    "title": "Chess",
+    "description": "Standard, unmodified chess.",
+    "modes": {
+      "multiplayer": {
+        "title": "Play with Friend",
+        "description": "Send a link to your friend to challenge them to a standard game of chess.",
+        "minPlayers": 2,
+        "maxPlayers": 2
+      },
+      "singleplayer": {
+        "title": "Play against Computer",
+        "description": "Play a game of chess against a questionable AI.",
+        "maxPlayers": 1
+      }
+    }
+  },
+  "minesweeper": {
+    "title": "Minesweeper",
+    "description": "Click on a square and hope it's not a mine! Revealed squares will indicate the number of mined squares directly adjacent or diagonal to it. Can you scout the entire grid without stepping on a mine?",
+    "modes": {
+      "singleplayer": {
+        "title": "Singleplayer",
+        "description": "Play a solo game of minesweeper.",
+        "maxPlayers": 1
+      },
+      "multiplayer": {
+        "title": "Multiplayer",
+        "description": "Play minesweeper with friends. If one of you reveals a mine, they're eliminated!"
+      },
+      "race": {
+        "title": "Race",
+        "description": "Race your friends on an identical board to see who can clear it first. Speedy or cautious?"
+      }
+    }
+  }
+}

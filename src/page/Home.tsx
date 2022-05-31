@@ -18,11 +18,11 @@ export default props => {
 
   return <div>
     <div style={{marginInline:'40px'}}>
-      <div style={{'padding-top':'30px'}}>
+      <div style={{paddingTop:'30px'}}>
         <Card border='primary'>
           <Card.Header>Join an Existing Lobby</Card.Header>
           <Card.Body style={{display: 'flex', flexDirection: 'row'}}>
-            <div style={{'padding-right':'10px'}}>
+            <div style={{paddingRight:'10px'}}>
               <input type='text' value={roomIdInput} onChange={handleChange} />
             </div>
             <Button variant='primary' onClick={onClickJoin}>Join</Button>

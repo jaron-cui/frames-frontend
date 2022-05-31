@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import games from '../resource/games.json';
 import getServiceSingleton from "../service/FrogService";

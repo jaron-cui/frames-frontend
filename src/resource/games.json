@@ -15,7 +15,7 @@
     "modes": {
       "multiplayer": {
         "title": "Play with Friend",
-        "description": "Send a link to your friend to challenge them to a standard game of chess.",
+        "description": "Challenge your friend to a standard game of chess.",
         "minPlayers": 2,
         "maxPlayers": 2
       },

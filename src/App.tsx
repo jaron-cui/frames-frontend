@@ -7,17 +7,25 @@ import getServiceSingleton from './service/FrogService';
 import Lobby from './page/Lobby';
 import Game from './page/Game';
 
-class Client extends React.Component {
-	constructor(props) {
+type ClientState = {
+  service: any,
+  page: JSX.Element;
+}
+
+class Client extends React.Component<any, ClientState> {
+  state: ClientState = {
+    service: 'blehbleh',
+    page: <Home />
+  };
+
+	constructor(props: any) {
 		super(props);
-		this.state = {};
 	}
 
   componentDidMount() {
-    this.service = getServiceSingleton(message => this.onMessage(message));
     this.setState({
-      page: <Home />
-    });
+      service: getServiceSingleton((message: any) => this.onMessage(message))
+    })
   }
 
   onMessage(message) {
@@ -30,7 +38,7 @@ class Client extends React.Component {
     };
   }
 
-  handleAssignment(room) {
+  handleAssignment(room): JSX.Element {
     if (room === null) {
         return <Home />;
     }

@@ -6,6 +6,7 @@ type CanvasProps = {
   width: number,
   height: number
 }
+
 const Canvas = (props: CanvasProps) => {
   const width: number = props.width;
   const height: number = props.height;

@@ -1,6 +1,4 @@
-import {Entity} from "./entity";
-
-const { Shape, Circle, ImageTexture } = require("./shape");
+import {Entity} from "./Entity";
 
 export const instant = t => 1;
 export const linear = t => t;

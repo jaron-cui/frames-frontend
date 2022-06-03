@@ -1,7 +1,5 @@
-import Animator, { sin, sinHalf2 } from "../gameframe/animator";
-import { ImageEntity } from "../gameframe/entity";
-import Game from "../gameframe/game";
-import { ImageTexture } from "../gameframe/shape";
+import Animator, { sinHalf2 } from "../gameframe/animator";
+import { ImageEntity } from "../gameframe/Entity";
 import boardTexture from '../resource/chess/board.png';
 import pawnTexture from '../resource/chess/piece/pawn.png'
 

@@ -1,6 +1,5 @@
 import Animator, { sin } from "./animator";
 
-
 export abstract class Entity {
   animator: Animator;
   id: number;

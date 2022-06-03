@@ -8,7 +8,7 @@ export default class Game {
   }
 
   add(object) {
-    return this._animator.addObject(object);
+    return this._animator.addEntity(object);
   }
 
   animateTo(target, property, value, duration, easing) {

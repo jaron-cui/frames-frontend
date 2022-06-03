@@ -1,3 +1,5 @@
+import {Entity} from "./entity";
+
 const { Shape, Circle, ImageTexture } = require("./shape");
 
 export const instant = t => 1;
@@ -6,6 +8,14 @@ export const sin = t => (Math.sin(Math.PI * (t - 0.5)) + 1) / 2;
 export const sinHalf2 = t => sin(t / 2 + .5);
 
 export default class Animator {
+  width: any;
+  height: any;
+  context: any;
+  background: string;
+  objects: Entity[];
+  animations: {};
+  layers: Entity[][];
+
   constructor(width, height) {
     this.width = width;
     this.height = height;
@@ -13,8 +23,7 @@ export default class Animator {
     this.context = null;
     this.background = "#FFFFFF";
     
-    this.objectsCreated = 0;
-    this.objects = {};//{0: new ImageTexture(0, 0, "./texture.png")};
+    this.objects = [];//{0: new ImageTexture(0, 0, "./texture.png")};
     this.animations = {};
 
     this.layers = [[]];
@@ -22,13 +31,13 @@ export default class Animator {
     //this.animateRelative(0, "x", 300, 30, sin);
   }
 
-  addObject(object, layer) {
-    this.objects[this.objectsCreated] = object;
+  addEntity(object: Entity, layer?: number): number {
+    this.objects.push(object);
     if (layer) {
       // TODO: add to specifiable layer
     }
-    this.layers[0].push(this.objectsCreated);
-    return this.objectsCreated++;
+    this.layers[0].push(object);
+    return this.objects.length - 1;
   }
 
   clearFrame() {
@@ -44,7 +53,7 @@ export default class Animator {
     this.drawBackground();
     this.layers.forEach(layer => {
       this.context.save();
-      layer.forEach(id => this.objects[id].draw(this.context));
+      layer.forEach(object => object.draw(this.context));
       this.context.restore();
     });
   }
@@ -92,24 +101,24 @@ export default class Animator {
     this.context.fillRect(0, 0, this.width, this.height);
     this.context.restore();
   }
-
+/*
   animateTo(id, property, to, duration, easing) {
     this._checkProperty(id, property);
     this.animateFromTo(id, property, this.objects[id][property], to, duration, easing);
   }
-
-  animateFromTo(id, property, initial, final, duration, easing) {
+*/
+  animateFromTo(id: number, property: string, initial: number, final: number, duration: number, easing) {
     this._checkProperty(id, property);
-    this._animateProperty(id, property, initial, final, duration, easing)
+    this.animateProperty(id, property, initial, final, duration, easing)
   }
-
+/*
   animateRelative(id, property, by, duration, easing) {
     this._checkProperty(id, property);
     let initial = this.objects[id][property];
     this.animateFromTo(id, property, initial, initial + by, duration, easing);
   }
-
-  _animateProperty(id, property, initial, final, duration, easing) {
+*/
+  private animateProperty(id, property, initial, final, duration, easing) {
     if (duration < 1) {
       throw Error("An animation must have a duration of at least 1 frame.");
     }
@@ -122,11 +131,15 @@ export default class Animator {
 
   _checkProperty(id, property) {
     if (!this.objects[id]) {
-      throw Error("Cannot animate object that does not exist. ID: '" + id + "'.");
+      throw Error("Cannot animate object that does not exist. ID: '" + JSON.stringify(id) + "'.");
     }
     let current = this.objects[id][property];
     if (Number(current) !== current) {
       throw Error("Property '" + id + "." + property + "' cannot be animated: '" + current + "'.");
     }
+  }
+
+  onRightClick() {
+
   }
 }

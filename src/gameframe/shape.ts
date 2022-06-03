@@ -1,5 +1,9 @@
 export class Shape {
-  constructor(x, y, scale) {
+  x: number;
+  y: number;
+  scale: number;
+
+  constructor(x: number, y: number, scale?: number) {
     this.x = x;
     this.y = y;
     this.scale = scale || 1;
@@ -11,7 +15,9 @@ export class Shape {
 }
 
 export class Circle extends Shape {
-  constructor(x, y, radius, color) {
+  radius: number;
+  color: any;
+  constructor(x: number, y: number, radius: number, color: any) {
     super(x, y);
     this.radius = radius;
     this.color = color || "#000000";
@@ -27,7 +33,10 @@ export class Circle extends Shape {
 }
 
 export class Rectangle extends Shape {
-  constructor(x, y, width, height, color) {
+  width: number;
+  height: number;
+  color: any;
+  constructor(x: number, y: number, width: number, height: number, color: any) {
     super(x, y);
     this.width = width;
     this.height = height;
@@ -41,7 +50,8 @@ export class Rectangle extends Shape {
 }
 
 export class ImageTexture extends Shape {
-  constructor(x, y, path, scale) {
+  image: HTMLImageElement;
+  constructor(x: number, y: number, path: string, scale: number) {
     super(x, y, scale);
     this.image = new Image();
     this.image.src = path;
@@ -49,8 +59,6 @@ export class ImageTexture extends Shape {
 
   draw(context) {
     const scale = "" + this.scale * 100 + "%";
-    
-    //document.body.appendChild(image)
     context.drawImage(this.image, this.x, this.y);
   }
 }

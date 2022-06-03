@@ -1,11 +1,14 @@
 import React, {useRef, useState, useEffect} from "react";
-import Coinflip from "../game/coinflip";
 import Chess from "../game/chess";
-import Game from "./game";
 
-const Canvas = (props) => {
-  const width = props.width;
-  const height = props.height;
+type CanvasProps = {
+  name: string,
+  width: number,
+  height: number
+}
+const Canvas = (props: CanvasProps) => {
+  const width: number = props.width;
+  const height: number = props.height;
   const style = {border: "3px solid #000000"};
   const ref = useRef(null);
   const [animator, setAnimator] = useState(new Chess(width, height));
@@ -39,7 +42,7 @@ const Canvas = (props) => {
     const relY = event.clientY - rect.top;
     const realH = rect.bottom - rect.top;
     const pos = {x: relX / realW * width, y: relY / realH * height};
-    animator.mousePos = pos;
+    animator['mousePosition'] = pos;
   }
 
   return <canvas 

@@ -1,4 +1,5 @@
-import { sin, sinHalf2 } from "../gameframe/animator";
+import Animator, { sin, sinHalf2 } from "../gameframe/animator";
+import { ImageEntity } from "../gameframe/entity";
 import Game from "../gameframe/game";
 import { ImageTexture } from "../gameframe/shape";
 import boardTexture from '../resource/chess/board.png';
@@ -7,17 +8,21 @@ import pawnTexture from '../resource/chess/piece/pawn.png'
 const boardOffset = {x:44,y:14};
 const tileSize = 64;
 const floatBy = 10;
-export default class Chess extends Game {
+export default class Chess extends Animator {
+  boardImage: ImageEntity;
+  board: ImageEntity[][];
+  heldPiece: any;
+
   constructor(width, height) {
     super(width, height);
-    this.boardImage = this.add(new ImageTexture(boardOffset.x, boardOffset.y, boardTexture, 1));
+    this.boardImage = new ImageEntity(boardOffset.x, boardOffset.y, boardTexture, this);
     this.board = [[], [this.newPiece('pawn', [0, 1])]];
     this.heldPiece = null;
   }
 
-  newPiece(name, position) {
+  newPiece(name: string, position) {
     let [visualX, visualY] = this.toVisualSpace(position);
-    return this.add(new ImageTexture(visualX, visualY, pawnTexture, 2));
+    return new ImageEntity(visualX, visualY, pawnTexture, this);
   }
 
   onTick() {
@@ -25,13 +30,12 @@ export default class Chess extends Game {
   }
 
   onLeftClick() {
-    let [x, y] = this.toBoardSpace(this.mousePos);
+    let [x, y] = this.toBoardSpace(this['mousePosition']);
     console.log("clicked position (" + x + ", " + y +")");
-    const piece = this.board[y] && this.board[y][x]
-    if (piece) {
+    const piece = this.board[y][x]
+    if (piece !== undefined && piece !== this.heldPiece) {
       this.heldPiece = piece;
-      const floatY = this.toVisualSpace([x, y])[1] - floatBy;
-      this.animateTo(piece, 'y', floatY, 10, sinHalf2);
+      piece.animatePropertyChange('y', -floatBy, 10, sinHalf2);
     }
   }
 

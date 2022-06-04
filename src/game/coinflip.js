@@ -1,4 +1,4 @@
-import { instant, sin } from "../gameframe/animator";
+import { instant, sin } from "../gameframe/Animator";
 import Game from "../gameframe/game";
 import { Circle, ImageTexture, Rectangle } from "../gameframe/shape";
 

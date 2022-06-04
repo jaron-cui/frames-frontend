@@ -15,14 +15,11 @@
     "modes": {
       "multiplayer": {
         "title": "Play with Friend",
-        "description": "Challenge your friend to a standard game of chess.",
-        "minPlayers": 2,
-        "maxPlayers": 2
+        "description": "Challenge your friend to a standard game of chess."
       },
       "singleplayer": {
         "title": "Play against Computer",
-        "description": "Play a game of chess against a questionable AI.",
-        "maxPlayers": 1
+        "description": "Play a game of chess against a questionable AI."
       }
     }
   },

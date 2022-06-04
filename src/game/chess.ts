@@ -1,4 +1,4 @@
-import Animator, { sinHalf2 } from "../gameframe/animator";
+import Animator, { sinHalf2 } from "../gameframe/Animator";
 import { ImageEntity } from "../gameframe/Entity";
 import boardTexture from '../resource/chess/board.png';
 import pawnTexture from '../resource/chess/piece/pawn.png'
@@ -35,6 +35,10 @@ export default class Chess extends Animator {
       this.heldPiece = piece;
       piece.animatePropertyChange('y', -floatBy, 10, sinHalf2);
     }
+  }
+
+  onRightClick(): void {
+    
   }
 
   toBoardSpace(coordinates) {

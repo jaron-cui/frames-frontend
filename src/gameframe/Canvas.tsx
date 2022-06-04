@@ -10,7 +10,6 @@ type CanvasProps = {
 const Canvas = (props: CanvasProps) => {
   const width: number = props.width;
   const height: number = props.height;
-  const style = {border: "3px solid #000000"};
   const ref = useRef(null);
   const [animator, setAnimator] = useState(new Chess(width, height));
   
@@ -31,10 +30,6 @@ const Canvas = (props: CanvasProps) => {
     }
   }, []);
 
-  const setProp = (property, value) => () => {
-    animator[property] = value;
-  }
-
   const onMouseMove = event => {
     const canvas = ref.current;
     const rect = canvas.getBoundingClientRect();
@@ -51,10 +46,17 @@ const Canvas = (props: CanvasProps) => {
     id={props.name}
     width={width}
     height={height}
-    style={style}
+    style={{
+      border: "3px solid #000000",
+      userSelect: 'none'
+    }}
+    unselectable='off'
     onMouseMove={onMouseMove}
-    onMouseDown={setProp("mouseDown", true)}
-    onMouseUp={setProp("mouseDown", false)}
+    onMouseDown={() => animator['mouseDown'] = true}
+    onMouseUp={event => {
+      animator['mouseDown'] = false;
+      event.preventDefault();
+    }}
     onClick={() => animator.onLeftClick()}
     onContextMenu={event => {
       event.preventDefault();

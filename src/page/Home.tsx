@@ -4,11 +4,11 @@ import games from '../resource/games.json';
 import { Button, Card } from "react-bootstrap";
 import getServiceSingleton from "../service/FrogService";
 
-export default props => {
+export default () => {
   const service = getServiceSingleton();
   const [roomIdInput, setRoomIdInput] = useState();
 
-  const handleChange = event => {
+  const handleChange = (event: any) => {
     setRoomIdInput(event.target.value);
   }
 
@@ -29,7 +29,7 @@ export default props => {
           </Card.Body>
         </Card>
       </div>
-      {Object.keys(games).map(id => <GameListing name={id} />)}
+      {Object.keys(games).map(id => <GameListing name={id} key={id} />)}
     </div>
   </div>
 }

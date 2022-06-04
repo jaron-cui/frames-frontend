@@ -1,4 +1,4 @@
-import Animator, { sin } from "./animator";
+import Animator, { sin } from "./Animator";
 
 export abstract class Entity {
   animator: Animator;

@@ -9,12 +9,25 @@ type GameListingProps = {
   name: string
 }
 
+type GameMode = {
+  title: string,
+  description: string
+}
+
+type GameMetadata = {
+  title: string,
+  description: string,
+  modes: {
+    [mode: string]: GameMode
+  }
+}
+
 export default function GameListing(props: GameListingProps) {
   const name: string = props.name;
-  const game = games[name];
+  const game: GameMetadata = games[name];
   const service = getServiceSingleton();
 
-  const onClick = (mode) => {
+  const onClick = (mode: string) => {
     service.createGame(name, mode);
   }
 
@@ -28,11 +41,11 @@ export default function GameListing(props: GameListingProps) {
           </Container>
           <Container style={{float:'left'}}>
             <Tabs
-              defaultActiveKey={Object.keys(game.modes)[0]}
+              defaultActiveKey={game.modes[Object.keys(game.modes)[0]].title}
               transition={false}
               className="mb-3">
               {Object.keys(game.modes).map(id => {
-                const mode = game.modes[id];
+                const mode: GameMode = game.modes[id];
                 return (
                   <Tab eventKey={mode.title} title={mode.title} key={mode.title}>
                     <Card.Text>{mode.description}</Card.Text>
